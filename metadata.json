@@ -1,0 +1,6 @@
+{
+  "name": "우리 반 1인 1역할 배정 도우미",
+  "description": "초등학교 학급을 위한 귀엽고 산뜻한 파스텔톤 1인 1역할 무작위 배정 및 A4 게시판 인쇄 웹 애플리케이션",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
