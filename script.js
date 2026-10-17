@@ -360,9 +360,11 @@ function updateStats() {
   const statRoles = document.getElementById("stat-roles-count");
   const statAssigned = document.getElementById("stat-assigned-count");
   const statStatus = document.getElementById("stat-status-text");
+  const gnbRolesBadge = document.getElementById("gnb-roles-badge");
 
   if (statStudents) statStudents.textContent = state.students.length;
   if (statRoles) statRoles.textContent = state.roles.length;
+  if (gnbRolesBadge) gnbRolesBadge.textContent = state.roles.length;
 
   const assignedCount = state.assignments.filter(a => a.student && a.student.trim() !== "").length;
   if (statAssigned) statAssigned.textContent = `${assignedCount}/${state.roles.length}`;
@@ -370,7 +372,7 @@ function updateStats() {
     if (assignedCount === state.roles.length && state.roles.length > 0) {
       statStatus.textContent = "배정 완료 ✨";
     } else {
-      statStatus.textContent = "진행 중";
+      statStatus.textContent = "배정 대기중";
     }
   }
 }
@@ -816,6 +818,22 @@ document.addEventListener("DOMContentLoaded", () => {
     state.searchQuery = "";
     clearSearchBtn.style.display = "none";
     renderCards();
+  });
+
+  // 네이버 검색 버튼 클릭 및 엔터키 이벤트
+  document.getElementById("btn-search-trigger")?.addEventListener("click", () => {
+    if (filterInput) {
+      state.searchQuery = filterInput.value;
+      renderCards();
+    }
+  });
+
+  filterInput?.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      renderCards();
+      document.getElementById("cards-section")?.scrollIntoView({ behavior: "smooth" });
+    }
   });
 
   // 정렬 탭 이벤트
